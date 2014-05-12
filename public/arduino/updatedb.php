@@ -2,8 +2,8 @@
 
 //This file is for database connection for rapport and diagram
 $conn_array = array (
-	"UID" => "bad",
-	"PWD" => "bad og plask",
+	"UID" => "",
+	"PWD" => "",
 	"Database" => "nih_bw",
 );
 
@@ -14,7 +14,7 @@ $time = strftime('%H:%M:%S');
  
 $value = $_GET['Temp'];
 
-$conn = sqlsrv_connect('nihsrv10-46' , $conn_array);
+$conn = sqlsrv_connect('' , $conn_array);
 
 $sql = "Insert into routines (date, time, value, emp_id)  values ('$date', '$time', '$value', (SELECT id FROM emps WHERE first_name='Arduino'))";
 
