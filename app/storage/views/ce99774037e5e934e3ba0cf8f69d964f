@@ -1,0 +1,46 @@
+
+<?php $__env->startSection('content'); ?>
+
+<!--
+  The view file for minside which shows the user data about the account
+-->
+
+<br>
+	
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <br>
+
+        <h2><span class="glyphicon glyphicon-cog"></span> Min side </h2>
+
+        <hr>
+         
+          <div id="response" > 
+            <?php if(Session::has('message')): ?>
+              <div class="alert alert-success">
+                <p><?php echo Session::get('message'); ?></p>
+              </div>
+          </div>
+            <?php endif; ?>
+
+	   
+      </div>
+    
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="list">
+            <a type="button" class="list-group-item"><?php echo 'Ansatt ID : '.$user->id; ?></a>
+            <a type="button" class="list-group-item"><?php echo 'Navn : '.$user->first_name.' '.$user->last_name; ?></a>  
+            <a type="button" class="list-group-item"><?php echo 'E-post : '.$user->email; ?></a>  
+            <a type="button" class="list-group-item"><?php echo 'Brukernavn : '.$user->user_name; ?></a>   
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

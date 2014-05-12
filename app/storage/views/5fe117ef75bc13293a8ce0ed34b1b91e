@@ -1,0 +1,139 @@
+<?php $__env->startSection('content'); ?>
+<!-- This is the content of the view file timemaling which contains the forms  -->
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					
+					<br>
+					<h2><span class="glyphicon glyphicon-time"></span> Timemåling</h2>
+					<hr>
+				<!-- Handling success messages  -->
+					<div id="response" > 
+						<?php if(Session::has('message')): ?>
+							<div class="alert alert-success">
+							   <p><?php echo Session::get('message'); ?></p> 
+							</div>
+					</div>
+						<?php endif; ?>
+				<!-- Handling error messages  -->
+					 <?php foreach ($errors->all() as $errors): ?>
+					<div class="alert alert-danger"> 
+						<div id="svart"><li><?php echo $errors; ?></li> </div>
+					</div>
+					<?php endforeach; ?>
+						
+							
+
+				</div>
+
+			</div>
+			   
+			<?php echo Form::open(array('url' => 'bassengweb/insertTM', 'method' => 'POST', 'class' => 'form-horizontal')); ?>
+
+				<div class="form-group">
+					<label  class="col-md-5 control-label">Tid: </label>
+					<div class="col-md-7">	
+						<?php echo Form::text('Time', $time, array('class' => 'form-control')); ?>
+					</div>
+				</div>
+ 
+				<div class="form-group">
+				<label  class="col-md-5 control-label">Basseng: </label>
+					<div class="col-md-7">
+						<?php echo Form::select('pool_id', $pools, Input::old('pool_id'), array('class' => 'form-control')); ?> 
+					</div>
+				</div>
+				 
+				<div class="form-group">
+				<label  class="col-md-7 control-label">Badende Per Time: </label>
+				<div class="col-md-5" >
+					<?php echo Form::text('T_Badende_per_Time', Input::old('T_Badende_per_Time'), array('class' => 'form-control')); ?>  
+				</div>
+				</div>
+			 
+				<div class="form-group">
+				<label  class="col-md-7 control-label">Temperatur: </label>
+					<div class="col-md-5">
+						<?php echo Form::text('T_Temperatur', Input::old('T_Temperatur'), array('class' => 'form-control' )); ?>  
+					</div>
+				</div>
+			 
+				<div class="form-group">
+					<div class="col-md-offset-6 col-md-5">
+						<?php echo Form::submit('Lagre Basseng måling', array('class' => 'btn btn-primary')); ?>
+					</div>
+				</div>
+				 <?php echo Form::close(); ?>
+
+			<!-- This is the right side form  -->	 
+			<div id="form-horizontal"> 
+					
+				<?php echo Form::open(array('url' => 'bassengweb/insertTM', 'method' => 'POST', 'class' => 'form-horizontal')); ?>
+					   
+					<div class="form-group">
+					   
+						<label  class="col-md-7 control-label">Tid: </label>
+						<div class="col-md-5">
+						 <?php echo Form::text('Time', $time, array('class' => 'form-control')); ?>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label  class="col-md-7 control-label">Basseng: </label>
+						<div class="col-md-5">
+							<?php echo Form::text('displayPool', $pools[99], array('disabled', 'class' => 'form-control' )); ?>  	
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label  class="col-md-7 control-label">Luft-Temperatur: </label>
+						<div class="col-md-5">
+							<?php echo Form::text('T_Luft_Temperatur', Input::old('T_Luft_Temperatur'), array('class' => 'form-control' )); ?>  	
+						</div>
+					</div>
+					 
+					<?php echo Form::hidden('pool_id', 99); ?>
+							
+
+					<div class="form-group">
+						<div class="col-md-offset-7 col-md-7">
+						   <?php echo Form::submit('Lagre Luft-måling', array('class' => 'btn btn-primary')); ?>
+						</div>
+					</div>
+					
+					<?php echo Form::close(); ?>
+
+			</div>
+				<hr> <!-- Gets input from the DB about the last ten measurements done, and prints them -->
+				   <?php if(isset($tenLast)): ?>
+				   <table class='table table-hover'>
+				   	<tr class='active'>
+						<td>ID</td>
+				   		<td>Tid</td>
+				   		<td>Tittel</td>
+				   		<td>Verdi</td>
+				   		<td>Basseng</td>
+				   		<td>Ansatt</td>
+				   	</tr>
+				   	<?php foreach ($tenLast as $tenDone): ?>
+				   	<tr>
+				   		<?php foreach($tenDone->measurements as $measurements): ?>
+						<td><?php echo $tenDone->id; ?></td>
+				   		<td><?php echo $tenDone->time; ?></td>
+				  		<td><?php echo $measurements->title; ?></td>
+				  		<?php endforeach; ?>
+				   		<td><?php echo $tenDone->value; ?></td>
+				   		<?php foreach($tenDone->measurements as $measurements): ?>
+				   		<td><?php echo $pools[$measurements->pivot->pool_id]; ?></td>
+				   		<?php endforeach; ?>
+				   		<td><?php echo $tenDone->emps->user_name; ?></td>
+				   	</tr>
+				   	<?php endforeach; ?>
+				   </table>
+				   <?php endif; ?>	
+		</div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

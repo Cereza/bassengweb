@@ -1,0 +1,162 @@
+
+<?php $__env->startSection('content'); ?>
+      
+<div class="jumbotron" >
+<div class="container" >
+<div class="row" >
+<div class="col-lg-12" >
+
+    
+    
+    
+<br>
+<h2><span class="glyphicon glyphicon-tint"></span> Vannmåling </h2>
+<hr>
+    
+  
+    <div id="response" > 
+        <?php if(Session::has('message')): ?>
+        <div class="alert alert-success">
+            <p><?php echo Session::get('message'); ?></p>
+        </div>
+    </div>
+     <?php endif; ?>
+       
+    
+    
+      <?php if($errors->has()): ?>
+  <div class="alert alert-danger">  
+    <div id="svart">    
+      <?php echo $errors->first('M_Fritt_Klor', '<li>:message</li>'); ?>
+            <?php echo $errors->first('M_Bundet_Klor', '<li>:message</li>'); ?>
+      <?php echo $errors->first('M_Total_Klor', '<li>:message</li>'); ?>
+            <?php echo $errors->first('M_PH', '<li>:message</li>'); ?>
+            <?php echo $errors->first('M_Auto_Klor', '<li>:message</li>'); ?>
+            <?php echo $errors->first('M_Auto_PH', '<li>:message</li>'); ?>
+            <?php echo $errors->first('M_Redox', '<li>:message</li>'); ?>
+    </div>
+    </div>
+      <?php endif; ?>  
+    
+    
+    
+    </div>
+  
+
+
+   
+
+    <div class="venstre">
+        
+        
+        
+     <?php echo Form::open(array('url' => 'bassengweb/insertHTT', 'method' => 'POST', 'class' => 'form-horizontal')); ?>
+    
+    
+  <div class="form-group">
+   
+    <label  class="col-md-5 control-label">Basseng: </label>
+      <div class="col-md-7">
+        
+        <?php echo Form::select('pool_id', $pools, Input::old('pool_id'), array('class' => 'form-control' )); ?> 
+      </div>
+  </div>
+     
+        
+        
+       
+       <div class="form-group">
+   
+    <label  class="col-md-5 control-label">Tid: </label>
+    <div class="col-md-7">
+        
+     <?php echo Form::text('Time', $time, array('class' => 'form-control')); ?>
+    </div>
+  </div> 
+      
+          <hr>
+        
+        
+        
+  <div class="form-group">
+    <label  class="col-md-7 control-label">Fritt klor: </label>
+    <div class="col-md-5" >
+      <?php echo Form::text('M_Fritt_Klor', Input::old('M_Fritt_Klor'), array('class' => 'form-control')); ?>  
+    </div>
+  </div>
+ 
+ 
+ 
+  <div class="form-group">
+    <label  class="col-md-7 control-label">Total Klor: </label>
+        <div class="col-md-5">
+            <?php echo Form::text('M_Total_Klor', Input::old('M_Total_Klor'), array('class' => 'form-control' )); ?>  
+        </div>
+  </div>   
+        
+         <div class="form-group">
+    <label  class="col-md-7 control-label">Bundet Klor: </label>
+        <div class="col-md-5">
+            <?php echo Form::text('M_Bundet_Klor', Input::old('M_Bundet_Klor'), array('class' => 'form-control' )); ?>  
+        </div>
+  </div>
+     
+   <div class="form-group">
+    <label  class="col-md-7 control-label">PH: </label>
+        <div class="col-md-5">
+            <?php echo Form::text('M_PH', Input::old('M_PH'), array('class' => 'form-control' )); ?>  
+        </div>
+  </div>  
+     
+       </div>
+    
+    <div class="form-horizontal">
+       
+     
+    
+    <div class="form-group">
+    <label  class="col-md-7 control-label">Automatikk - Klor: </label>
+        <div class="col-md-5">
+            <?php echo Form::text('M_Auto_Klor', Input::old('M_Auto_Klor'), array('class' => 'form-control' )); ?>  
+        </div>
+  </div> 
+    
+
+      
+    <div class="form-group">
+    <label  class="col-md-7 control-label">Automatikk - PH: </label>
+        <div class="col-md-5">
+            <?php echo Form::text('M_Auto_PH', Input::old('M_Auto_PH'), array('class' => 'form-control' )); ?>  
+        </div>
+    </div> 
+      
+     
+    
+      <div class="form-group">
+    <label  class="col-md-7 control-label">Redox: </label>
+        <div class="col-md-5">
+            <?php echo Form::text('M_Redox', Input::old('M_Redox'), array('class' => 'form-control' )); ?>  
+        </div>
+      </div> 
+    
+   
+   
+
+  <div class="form-group">
+    <div class="col-md-offset-8 col-md-5">
+       <?php echo Form::submit('Lagre', array('class' => 'btn btn-primary btn-lg')); ?>
+    </div>
+  </div>
+     
+
+      <?php echo Form::close(); ?>
+
+   </div>
+      </div>
+ 
+</div>
+
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

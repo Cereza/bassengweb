@@ -1,0 +1,58 @@
+<!-- This file contains the navigation menu for the rapport and diagram files. -->
+
+	<!-- Fixed navbar -->
+	
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	  
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			  
+		</div>
+			
+		<div class="navbar-collapse collapse">
+			<p class="navbar-text pull-right">
+				<span class="glyphicon glyphicon-user"></span>
+				<span class="label label-info"> 
+					<a  href="../../public/bassengweb/users"> 
+						<?php
+							session_start();
+							echo "Min side: ";echo $_SESSION['bruker'];
+						?>
+					</a> 
+				</span>
+				<a href="../../public/bassengweb/logout"><span class="label label-danger">Logg ut</span></a>
+			</p>
+			<!-- Content on the navigation menu -->
+			<ul class="nav navbar-nav pull-left">
+			
+			   
+			   <li class='pil'><a href="../../public/bassengweb/timemaling" class='timemaling'>Timemåling</a></li>
+			   <li class='pil'><a href="../../public/bassengweb/vannmaling" class='vannmaling'>Vannmåling</a></li>
+			   <li class='pil'><a href="../../public/bassengweb/oppgaver" class='oppgaver' >Oppgaver  </a></li>
+				
+				<li class="pil dropdown {{ ($aktiv == 'dagvakt' || $aktiv== 'kveldsvakt' || $aktiv=='helgevakt') ? 'active' : '' }}">
+					<a href="#" class="dropdown-toggle glyphicon glyphicon-ok" data-toggle="dropdown"><span class="glyphicon glyphicon-ok" ></span> <big>Rutiner</big> <b class="caret"></b></a>
+					
+					<ul class="dropdown-menu">
+						<li><a href="../../public/bassengweb/dagvakt" class='dagvakt' >Dagvakt</a></li>
+						<li><a href="../../public/bassengweb/kveldsvakt" class='kveldsvakt' >Kveldsvakt</a></li>
+						<li><a href="../../public/bassengweb/helgevakt" class='helgevakt' >Helgevakt</a></li>
+					</ul>   
+				</li>
+				
+				<li  class='pil'><a href="../../public/bassengweb/kontrollcm" class='kontrollcm' >Vask med CM</a></li>
+				<li  class='pil'><a href="../../public/bassengweb/sok" class='sok' >Søk</a></li>
+				<li  class='pil <?php if($page=='rapport') {echo 'active';} ?>'> <a href="../rapport/index.php" class='rapport' >Rapport</a></li> 
+				<li  class='pil <?php if($page=='diagram') {echo 'active';} ?>' ><a href="../diagram/index.php" class='diagram' >Diagram</a></li>  
+				
+			</ul>
+				  
+		</div><!--/.nav-collapse -->
+
+    </div>
+    

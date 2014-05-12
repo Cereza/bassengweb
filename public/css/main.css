@@ -1,0 +1,241 @@
+/* This is the main css */
+    
+html,body{
+height: 100%;min-height:100%;
+}
+   
+/* This is the navigation css */   
+li.pil:hover::after {
+    content: ' ';
+    position: absolute;
+    border: solid 10px transparent;
+    border-top: solid 0px transparent;
+    border-width: 10px;
+    left: 50%;
+    margin-left: -10px;
+    border-color: #222 transparent transparent transparent;
+}
+
+.navbar-default .navbar-nav>.active>a:before,
+.navbar-nav>li>a:before {
+    background-repeat: no-repeat;
+    background-position: 0 top;
+    content: "";
+    display: inline-block;
+    height: 32px;
+    margin-right: 5px;
+    vertical-align: middle;
+    width: 30px;
+}
+/* This is the active css for the navigation which shows the different images  */
+.navbar-default .navbar-nav>.active>a.home:before,
+.navbar-nav>li>a.home:before { background-image: url('../images/home.png'); }
+
+.navbar-default .navbar-nav>.active>a.timemaling:before,
+.navbar-nav>li>a.timemaling:before { background-image: url('../images/maling.png'); }
+
+.navbar-default .navbar-nav>.active>a.vannmaling:before,
+.navbar-nav>li>a.vannmaling:before { background-image: url('../images/vanndrape.png'); }
+
+.navbar-default .navbar-nav>.active>a.oppgaver:before,
+.navbar-nav>li>a.oppgaver:before { background-image: url('../images/tasks.png'); }
+
+.navbar-default .navbar-nav>.active>a.dagvakt:before,
+.navbar-nav>li>a.dagvakt:before { background-image: url('../images/sol.png'); }
+
+.navbar-default .navbar-nav>.active>a.kveldsvakt:before,
+.navbar-nav>li>a.kveldsvakt:before { background-image: url('../images/kveld.png'); }
+
+.navbar-default .navbar-nav>.active>a.kontrollcm:before,
+.navbar-nav>li>a.kontrollcm:before { background-image: url('../images/vaske.png'); }
+
+.navbar-default .navbar-nav>.active>a.sok:before,
+.navbar-nav>li>a.sok:before { background-image: url('../images/sok.png'); }
+
+.navbar-default .navbar-nav>.active>a.rapport:before,
+.navbar-nav>li>a.rapport:before { background-image: url('../images/top3.png'); }
+
+.navbar-default .navbar-nav>.active>a.diagram:before,
+.navbar-nav>li>a.diagram:before { background-image: url('../images/top2.png'); }
+
+.navbar-default .navbar-nav>.active>a.minside:before,
+.navbar-nav>li>a.minside:before { background-image: url('../images/top2.png'); }
+
+/* This is the outer container */
+.jumbotron {
+    
+    margin-bottom: auto;
+    min-height: inherit;       
+}
+
+
+h2  {
+ 
+    text-align: center;
+    margin-top: auto;
+   }
+   
+/* This is the styling for the container */
+.container {
+    
+    min-height: 530px;
+     /* set border styling */
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;  
+    
+ 
+    /* set border roundness */
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+     
+    
+    
+    margin: 0 auto;
+    width: 830px;
+  /* display: inline-block; */
+    background-color: white;
+   
+    
+}
+
+/* This is the container for the diagram page*/
+.container-diagram {
+    
+    min-height: 900px;
+     /* set border styling */
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;  
+    
+    /* set border roundness */
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    
+    margin: 0 auto;
+    width: 1200px;
+  /* display: inline-block; */
+    background-color: white;
+   
+    
+}
+
+/* Centering text */
+#center {
+    
+ text-align: center;
+    
+}
+/* Move the text to right */
+#center-right {
+    
+    text-align: right; 
+}
+
+/* position of the login buttom  */
+.logginn {
+ 
+    margin-top:10px  
+}
+
+/* Style of br tag  */
+#br {
+     
+   margin: 34px 0;
+}
+
+
+#gsubmit {
+ 
+    padding-right: 15%;
+}
+
+/* For positioning the response message in the center */
+#response {
+    
+text-align: center;    
+
+}
+
+.form-horizontal {
+
+    float: left;
+}
+
+/* Different divs for positioning forms */
+.venstre {
+    
+float: left;
+    
+}
+
+
+.alle {
+ 
+    margin-left: 15%;
+  
+}
+
+.alle2 {
+ 
+    margin-left: 4%;
+  
+}
+
+.alle3 {
+    
+    margin-left: 7%;
+    
+}
+
+
+.alle4 {
+
+margin-left: 25%;
+
+}
+
+
+.alle5 {
+ 
+    margin-left: 10% ;
+    
+}
+
+
+.text-left-imp .form-group .control-label{
+  text-align:left !important;
+  }
+
+
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 970px;
+    }
+}
+
+/*  Positioning of the diagram */
+#chart_div
+{
+ 
+    margin: 0 auto;
+    float:left;
+    
+}
+
+
+.label a{color:#fff;}
+
+.label {margin-right:3px;}
+
+
+.label, .label a{font-size:12px;} 
+
+/* Color of the error-messages  */
+
+#svart {
+    color: black;
+}

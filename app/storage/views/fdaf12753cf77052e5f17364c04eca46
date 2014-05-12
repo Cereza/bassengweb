@@ -1,0 +1,143 @@
+
+<?php $__env->startSection('content'); ?>
+
+<!--
+    The view file for creating a new user to be stored in the DB.
+    Also shows flash messages for errors and validation errors.
+    Old input is reflashed into the form boxes upon errors.
+-->
+
+<br>
+	
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+ 
+                <br>
+
+                <h2><span class="glyphicon glyphicon-cog"></span> <?php echo $title; ?></h2>
+                
+                <hr>
+        
+                <?php if(Session::has('message')): ?>
+                    <p style="color: green;"><?php echo Session::get('message'); ?></p>
+                <?php endif; ?>
+
+                <div id="response" > 
+
+                    <?php if($errors->has()): ?> <!-- Handles validation error messages -->
+                        <div class="alert alert-danger">  
+                            <?php foreach ($errors->all() as $errors): ?>
+                                <div id="svart"><li><?php echo $errors; ?></li> </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <?php echo Form::open(array('url' => 'bassengweb/spawn_user', 'method' => 'POST', 'autocomplete' => 'off')); ?> <!-- The form for user creation -->
+                <div class="col-md-8">
+				    <div class="form-group">
+                        <div id="center-right">
+					       <label class="col-md-7 control-label pull right"><?php echo Form::label('first_name', 'Fornavn: '); ?> </label>
+                        </div>
+                        <div class="col-md-4">
+                            <?php echo Form::text('first_name', Input::old('first_name'), array('class' => 'form-control')); ?>
+                        </div>
+				    </div>
+                </div>
+            </div>
+    
+            <br>
+
+            <div class="row">
+                <div class="col-md-8">
+    				<div class="form-group">
+                        <div id="center-right">
+    					   <label class="col-md-7 control-label pull right"><?php echo Form::label('last_name', 'Etternavn: '); ?> </label>
+                        </div>
+    					<div class="col-md-4">
+                            <?php echo Form::text('last_name', Input::old('last_name'), array('class' => 'form-control' )); ?>
+    					</div>
+    				</div>
+    			</div>
+            </div>
+
+            <br>
+     
+            <div class="row">	
+                <div class="col-md-8">
+				    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-7 control-label pull right"><?php echo Form::label('email', 'E-post : '); ?></label>
+                        </div>
+					    <div class="col-md-5">
+                       	    <?php echo Form::text('email', Input::old('email'), array('class' => 'form-control')); ?>
+					    </div>
+                    </div>
+                </div>
+            </div>
+    
+            <br>
+    
+            <div class="row">    
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div id="center-right">
+					       <label class="col-md-7 control-label pull right"><?php echo Form::label('user_type', 'Brukertype: '); ?></label>
+                        </div>
+					    <div class="col-md-4">
+                            <?php echo Form::select('user_type', array('user' => 'user', 'admin' => 'admin'), 'user', array('class' => 'form-control')); ?>
+					    </div>
+				    </div>
+                </div>
+            </div>
+    
+	        <br>
+    
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div id="center-right">
+					       <label class="col-md-7 control-label pull right"><?php echo Form::label('password', 'Passord : '); ?></label>
+                        </div>
+					    <div class="col-md-4">
+                            <?php echo Form::password('password', array('class' => 'form-control')); ?>
+					    </div>
+				    </div>
+                </div>
+            </div>
+    
+            <br>
+    
+            <div class="row">
+                <div class="col-md-8">
+                   <div class="form-group">
+                        <div id="center-right">
+			         		<label class="col-md-7 control-label pull right"><?php echo Form::label('password_confirmation', 'Bekreft Passord : '); ?></label>
+                        </div>
+					    <div class="col-md-4">
+                            <?php echo Form::password('password_confirmation', array('class' => 'form-control')); ?>
+					    </div>
+				    </div>
+                </div>
+            </div>
+		
+            <br>
+    
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-5">
+                        <?php echo Form::submit('Opprett bruker', array('class' => 'btn btn-primary')); ?>
+                    </div>
+                        <?php echo Form::close(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

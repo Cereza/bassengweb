@@ -1,0 +1,245 @@
+<?php $__env->startSection('content'); ?>
+ <!-- This is the content of the view file kontrollcm which contains the forms  -->	
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<br>
+					<h2><span class="glyphicon glyphicon-time"></span> Kontroll CM </h2>
+					<hr>
+					<!-- Handling success messages  -->		
+					<div id="response" > 
+						<?php if(Session::has('message')): ?>
+						<div class="alert alert-success">
+							<p><?php echo Session::get('message'); ?></p>
+						</div>
+					</div>
+						<?php endif; ?>
+					<!-- Handling error messages  -->			
+					<?php if($errors->has()): ?>
+						<div class="alert alert-danger">
+							<div id="svart">
+								<?php echo $errors->first('C_Timeteller', '<li>:message</li>'); ?>
+							</div>
+						</div>		 
+					<?php endif; ?>
+    
+    
+				</div>
+    
+    
+				<div class="row">
+				
+					<?php echo Form::open(array('url' => 'bassengweb/insertKCM', 'method' => 'POST', 'class' => 'form-inline')); ?>
+					
+					<div class="col-md-6">
+						<div class="form-group">
+						  <label class="col-md-3 control-label">Dato: </label>
+							<div class="col-md-6 col-lg-6">
+								<?php echo Form::text('Date', $date, array('class' => 'form-control')); ?>
+							</div>
+						</div>
+					  </div>
+  
+					<div class="col-md-6 text-left-imp"> 
+						<div class="form-group">
+						  <label class="col-md-3 control-label">Tid: </label>
+							<div class="col-md-6 col-lg-6">
+								<?php echo Form::text('Time', $time, array('class' => 'form-control')); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+  
+				<hr>
+    
+				<div class="row">
+				
+				  <div class="col-md-6">
+						<div class="form-group">
+						  <label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Timeteller', 'Timeteller:'); ?> </label>
+						  <div class="col-md-6 col-lg-6">
+							 <?php echo Form::text('C_Timeteller', Input::old('C_Timeteller'), array('class' => 'form-control' )); ?>     
+						  </div>
+						</div>
+				  </div>
+						
+					<div class="col-md-6 text-left-imp"> 
+						<div class="form-group">
+							<label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Ren_Opplos_Filter', 'Rengjøre oppløsningsfilteret (Tir):'); ?> </label>
+							<?php if ($day==='Tuesday'): ?>  
+								<?php if(in_array('C_Ren_Opplos_Filter', $done)): ?>
+									<span class='glyphicon glyphicon-ok'></span>
+								<?php else: ?>  
+									<div class="col-md-6 col-lg-6">
+										<?php echo Form::checkbox('C_Ren_Opplos_Filter', 'Utført'); ?>  
+									</div>
+								 <?php endif; ?> 
+							<?php else: ?>
+								<span class='glyphicon glyphicon-remove'></span>
+							<?php endif; ?>
+						</div>
+					 </div>
+				</div>
+  
+				<hr>
+				
+				<div class="row">
+				
+					<div class="col-md-6">
+						<div class="form-group">
+						  <label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_AllRent', 'Allrent:'); ?> </label>
+							<div class="col-md-6 col-lg-6">
+							   <?php if(in_array('C_AllRent', $done)): ?>
+									<span class='glyphicon glyphicon-ok'></span>
+								<?php else: ?>
+									<?php echo Form::checkbox('C_AllRent', 'Utført'); ?>   
+							  <?php endif; ?>   
+							</div>
+						</div>
+					</div>
+					 
+					<div class="col-md-6 text-left-imp"> 
+						<div class="form-group">
+							<label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Ren_Nal', 'Rengjøre Nal (Tir):'); ?> </label> 
+							<?php if ($day==='Tuesday'): ?>  
+								<?php if(in_array('C_Ren_Nal', $done)): ?>
+									<span class='glyphicon glyphicon-ok'></span>
+								<?php else: ?>
+									<div class="col-md-6 col-lg-6">
+										<?php echo Form::checkbox('C_Ren_Nal', 'Utført'); ?>  
+									</div>
+								<?php endif; ?> 
+							<?php else: ?>
+								<span class='glyphicon glyphicon-remove'></span>
+							<?php endif; ?>
+						</div>
+					</div>   
+					 
+				</div>
+			
+				<hr>
+    
+				<div class="row">
+				
+					<div class="col-md-6">
+						<div class="form-group">
+						  <label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Grovrent_Ekstra', 'Grovent Ekstra:'); ?> </label>
+							<div class="col-md-6 col-lg-6">
+								<?php if(in_array('C_Grovrent_Ekstra', $done)): ?>
+									<span class='glyphicon glyphicon-ok'></span>
+								<?php else: ?>
+									<?php echo Form::checkbox('C_Grovrent_Ekstra', 'Utført'); ?>   
+								<?php endif; ?>   
+						  </div>
+						</div>
+					</div>
+					 
+					<div class="col-md-6 text-left-imp"> 
+						<div class="form-group">
+							<label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Kontr_Slang_Tank', 'Kontroller slanger og tank (Tir):'); ?> </label>
+							<?php if ($day==='Tuesday'): ?>							
+								<?php if(in_array('C_Kontr_Slang_Tank', $done)): ?>
+									<span class='glyphicon glyphicon-ok'></span>
+								<?php else: ?>
+									<div class="col-md-6 col-lg-6">
+										<?php echo Form::checkbox('C_Kontr_Slang_Tank', 'Utført'); ?>  
+									</div>
+								<?php endif; ?> 
+							<?php else: ?>
+								<span class='glyphicon glyphicon-remove'></span>
+							<?php endif; ?>
+						</div>
+					</div>		   
+				</div>
+				
+				<hr>
+    
+				<div class="row">
+				
+					<div class="col-md-6">
+						<div class="form-group">
+						  <label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Ren_Opplos_Tank', 'Rengjøre Oppløsningstank:'); ?> </label>
+							<div class="col-md-6 col-lg-6">
+								<?php if(in_array('C_Ren_Opplos_Tank', $done)): ?>
+									<span class='glyphicon glyphicon-ok'></span>
+								<?php else: ?>
+									<?php echo Form::checkbox('C_Ren_Opplos_Tank', 'Utført'); ?>   
+								<?php endif; ?>    
+								</div>
+						</div>
+					</div>
+			 
+					<div class="col-md-6 text-left-imp"> 
+						<div class="form-group">
+							<label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Kont_Ren_KostPad', 'Kontroller og rengjør kost/pad og padholder (Tir):'); ?> </label>
+							<div class="col-md-6 col-lg-6">
+								<?php if ($day==='Tuesday'): ?>  
+									<?php if(in_array('C_Kont_Ren_KostPad', $done)): ?>
+										<span class='glyphicon glyphicon-ok'></span>
+									<?php else: ?> 
+										<div class="col-md-6 col-lg-6">
+											<?php echo Form::checkbox('C_Kont_Ren_KostPad', 'Utført'); ?>  
+										</div>
+									<?php endif; ?> 
+								<?php else: ?>
+									<span class='glyphicon glyphicon-remove'></span>
+								<?php endif; ?> 
+							</div>	
+						 </div>	  
+					</div>
+				</div>
+				
+				<hr>
+    
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Ren_Opps_Tank', 'Rengjøre Oppsamlingstank:'); ?> </label>
+							<div class="col-md-6 col-lg-6">
+								<?php if(in_array('C_Ren_Opps_Tank', $done)): ?>
+									<span class='glyphicon glyphicon-ok'></span>
+								<?php else: ?>
+									<?php echo Form::checkbox('C_Ren_Opps_Tank', 'Utført'); ?>   
+								<?php endif; ?>  
+							</div>
+						</div>
+					</div>  
+				</div>
+				
+				<hr>
+    
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="col-md-6 col-lg-6 control-label"><?php echo Form::label('C_Ren_Flott_gitter', 'Rengjøre Flottørgitter:'); ?> </label>
+							<div class="col-md-6 col-lg-6">
+								<?php if(in_array('C_Ren_Flott_gitter', $done)): ?>
+									<span class='glyphicon glyphicon-ok'></span>
+								<?php else: ?>
+									<?php echo Form::checkbox('C_Ren_Flott_gitter', 'Utført'); ?>   
+								<?php endif; ?>  
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<hr>
+			
+				<div class="well md">
+					<div class="form-group">
+						<div class="col-md-offset-5 col-md-5">
+							<?php echo Form::submit('Lagre', array('class' => 'btn btn-primary btn-lg')); ?>
+						</div>
+					</div><br>
+				</div>
+
+				<?php echo Form::close(); ?>
+				
+			</div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

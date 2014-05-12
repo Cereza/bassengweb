@@ -1,0 +1,103 @@
+
+<?php $__env->startSection('content'); ?>
+
+	   <br><br>
+<div class="jumbotron" >
+<div class="container-diagram" >
+<div class="row" >
+<div class="col-lg-12" >
+
+ <br>
+<h2><span class="glyphicon glyphicon-th-list"></span> Endringslogg </h2>
+<hr>
+    
+    
+    <div id="response" > 
+        <?php if(Session::has('message')): ?>
+        <div class="alert alert-success">
+            <p><?php echo Session::get('message'); ?></p>
+        </div>
+    </div>
+	   <?php endif; ?>
+<head>
+	<title><?php echo $title; ?></title>
+	 
+</head>
+<body>
+<div class="row">
+    <?php echo Form::open(array('url' => 'bassengweb/chlog', 'method' => 'GET')); ?>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="col-md-5 control-label"><?php echo Form::label('fraDato', 'Fra dato:'); ?> </label>
+					<div class="col-md-6 col-lg-6">
+					<?php echo Form::text('fraDato', Input::old('fraDato'), array('placeholder' => '15/04/2014', 'class' => 'form-control')); ?>
+					</div>
+				</div>
+			</div>
+  
+    <div class="col-md-6 text-left-imp"> 
+		
+			
+				<div class="form-group">
+					<label class="col-md-4 control-label"><?php echo Form::label('tildato', 'Til dato:'); ?> </label>
+					<div class="col-md-6 col-lg-6">
+					 <?php echo Form::text('tilDato', Input::old('tilDato'), array('placeholder' => '15/04/2014', 'class' => 'form-control')); ?>
+					</div>
+				</div>
+		
+		
+	</div>
+</div>
+    
+    <br>
+    
+<div class="row">    
+  <div class="form-group">
+    <div class="col-md-offset-4 col-md-4">
+       <?php echo Form::submit('Søk', array('class' => 'btn btn-primary')); ?>
+       <?php echo HTML::linkRoute('change_log', 'Vis alle endringer', array(), array('class' => 'btn btn-primary')); ?> 
+        <?php echo Form::close(); ?>
+    </div>
+  </div>
+
+</div>
+    <hr>
+    
+
+    
+<table  class='table table-hover'>
+	<tr class='active'>
+		<td>Original ID</td>
+		<td>Tittel</td>
+		<td>Gammel Verdi</td>
+		<td>Ny Verdi</td>
+		<td>Type Endring</td>
+		<td>Lagret</td>
+		<td>Endret</td>
+		<td>Tid</td>
+		<td>Endret av</td>
+	</tr>
+	<?php foreach ($changes as $change): ?>
+		<tr>
+			<td><?php echo $change->routine_id; ?></td>
+			<td><?php echo $change->title; ?></td>
+			<td><?php echo $change->value_old; ?></td>
+			<td><?php echo $change->value_new; ?></td>
+			<td><?php echo $change->action; ?></td>
+			<td><?php echo date('d/m/Y', strtotime($change->date)); ?></td>
+			<td><?php echo date('d/m/Y', strtotime($change->changed_at)); ?></td>
+			<td><?php echo $change->time; ?></td>
+			<td><?php echo $change->changed_by; ?></td>
+		</tr>	
+	<?php endforeach; ?>
+</table>
+
+<?php echo $changes->appends(Input::except('page'))->links(); ?>
+<br/>
+
+
+
+
+</body>
+</html>
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

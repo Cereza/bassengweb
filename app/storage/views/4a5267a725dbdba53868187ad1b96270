@@ -1,0 +1,175 @@
+
+<?php $__env->startSection('content'); ?>
+
+<!--
+    The view file for editing a user stored in the DB.
+    Automatically shows the current data for the user being edited.
+    Also contains flash messages for showing errors/success.
+-->
+ 
+<div class="jumbotron" >
+    <div class="container" >
+        <div class="row" >
+            <div class="col-lg-12" >
+                <br>
+                    <h2><span class="glyphicon glyphicon-edit"></span> <?php echo $title; ?>: <b> <?php echo $user->first_name.' '.$user->last_name; ?></b></h2>
+                    <div class="row">
+                        <div id="center">
+                            <p><small>Opprettet: <?php echo date('d/m/Y H:i:s', strtotime($user->created_at)); ?> | 
+                            Sist oppdatert: <?php echo date('d/m/Y H:i:s', strtotime($user->updated_at)); ?></small></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="response" > <!-- Handles flash error messages -->
+                        <?php if(Session::has('message')): ?>
+                            <div class="alert alert-danger">
+                                <div id="svart"><li><?php echo Session::get('message'); ?></li></div>
+                            </div>
+                    </div>
+                        <?php endif; ?>
+                        <?php foreach ($errors->all() as $errors): ?> <!-- Handles validation error messages -->
+                            <div class="alert alert-danger"> 
+                                <div id="svart"><li><?php echo $errors; ?></li></div>
+                            </div>
+                        <?php endforeach; ?>
+            </div>
+
+            <div class="row">
+                <?php echo Form::open(array('url' => 'bassengweb/update_user', 'method' => 'PUT')); ?> <!-- The form for updating the user -->
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-7 control-label pull right"><?php echo Form::label('emp_id', 'Ansatt ID: '); ?> </label>
+                        </div>
+                        <div class="col-md-5">
+                            <?php echo Form::text('emp_id', $user->id, array('disabled',  'class' => 'form-control')); ?>  
+                        </div>
+                            <?php echo Form::hidden('id', $user->id); ?>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-7 control-label pull right"><?php echo Form::label('first_name', 'Fornavn: '); ?> </label>
+                        </div>
+                        <div class="col-md-5">
+                            <?php echo Form::text('first_name', $user->first_name, array('class' => 'form-control')); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+    
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-7 control-label pull right"><?php echo Form::label('last_name', 'Etternavn: '); ?> </label>
+                        </div>
+                        <div class="col-md-5">
+                            <?php echo Form::text('last_name', $user->last_name, array('class' => 'form-control')); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <br>
+    
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-7 control-label pull right"><?php echo Form::label('uname', 'Brukernavn: '); ?> </label>
+                        </div>
+                        <div class="col-md-5">
+                            <?php echo Form::text('uname', $user->user_name, array('disabled', 'class' => 'form-control')); ?>
+                        </div>
+                            <?php echo Form::hidden('user_name', $user->user_name); ?>
+                        </div>
+                    </div>
+            </div>
+        
+            <br>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-6 control-label pull right"><?php echo Form::label('email', 'E-post: '); ?> </label>
+                        </div>
+                        <div class="col-md-6">
+                            <?php echo Form::text('email', $user->email, array('class' => 'form-control')); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+    
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-7 control-label pull right"><?php echo Form::label('password', 'Nytt Passord: '); ?> </label>
+                        </div>
+                        <div class="col-md-5">
+                            <?php echo Form::password('password', array('class' => 'form-control')); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-7 control-label pull right"><?php echo Form::label('conf_password', 'Bekreft Passord: '); ?></label>
+                        </div>
+                        <div class="col-md-5">
+                            <?php echo Form::password('conf_password', array('class' => 'form-control')); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+   
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div id="center-right">
+                            <label class="col-md-7 control-label pull right"><?php echo Form::label('user_type', 'Brukertype (user/admin) : '); ?></label>
+                        </div>
+                        <div class="col-md-5">    
+                            <?php echo Form::select('user_type', array('user' => 'user', 'admin' => 'admin'), $user->user_type , array('class' => 'form-control')); ?> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">    
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-4">
+                        <?php echo Form::submit('Oppdater bruker', array('class' => 'btn btn-primary')); ?>
+                    </div>
+                </div>
+            </div>
+            
+            <br>
+
+        </div>
+    </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
