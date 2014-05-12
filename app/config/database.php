@@ -76,10 +76,10 @@ return array(
 
 		'sqlsrv' => array(
 			'driver'   => 'sqlsrv',
-			'host'     => 'nihsrv10-46',
-			'database' => 'nih_bw',
-			'username' => 'bad',
-			'password' => 'bad og plask',
+			'host'     => 'DatabaseIP',
+			'database' => 'Name',
+			'username' => 'username',
+			'password' => 'Password',
 			'prefix'   => '',
 		),
 
