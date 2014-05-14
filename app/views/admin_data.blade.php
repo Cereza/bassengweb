@@ -30,7 +30,7 @@
     
       <div class="panel panel-default">
         <div class="panel-body">
-          <div class="list">
+          <div class="list"> <!-- Displays information about the user -->
             <a type="button" class="list-group-item">{{ 'Ansatt ID : '.$user->id }}</a>
             <a type="button" class="list-group-item">{{ 'Navn : '.$user->first_name.' '.$user->last_name }}</a>  
             <a type="button" class="list-group-item">{{ 'E-post : '.$user->email }}</a>  
@@ -43,7 +43,7 @@
 
       <div class="row">
         <div class="well">
-          <div id="center">
+          <div id="center"> <!-- Buttons for entering the create user and change log pages -->
             {{ HTML::linkRoute('create_user', 'Opprett Bruker', array(), array('class' => 'btn btn-primary')) }}  
             {{ HTML::linkRoute('change_log', 'Endringslogg', array(), array('class' => 'btn btn-primary')) }} 
           </div>
@@ -54,7 +54,7 @@
         
       <div class="well">
         <div class="row">
-          <div class="form-group">
+          <div class="form-group"> <!-- Form that displays users that can be edited -->
             <label  class="col-md-4 control-label">Velg bruker som skal redigeres: </label>
             <div class="col-md-5">
               {{ Form::open(array('url' => 'bassengweb/edit_user', 'method' => 'GET')) }} 
@@ -70,7 +70,7 @@
   
       <div class="well">
         <div class="row">
-          <div class="form-group">
+          <div class="form-group"> <!-- Form that displays currently deactivated users that can be activated -->
             <label  class="col-md-4 control-label">Velg bruker som skal aktiveres: </label>
             <div class="col-md-5">
               {{ Form::open(array('url' => 'bassengweb/ressurect_user', 'method' => 'PUT')) }}   
@@ -86,7 +86,7 @@
   
       <div class="well">
         <div class="row"> 
-          <div class="form-group">
+          <div class="form-group"> <!-- Form that displays currently active users that can be deactivated -->
             <label  class="col-md-4 control-label">Velg bruker som skal deaktiveres: </label>
             <div class="col-md-5">
               {{ Form::open(array('url' => 'bassengweb/delete_user', 'method' => 'GET')) }}
